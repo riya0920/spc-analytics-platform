@@ -1,0 +1,165 @@
+{
+  "attribute": {
+    "p": {
+      "center": 0.030207972623388264,
+      "shift_at": 140,
+      "p_before": 0.03,
+      "p_after": 0.075,
+      "points_to_detect": 0,
+      "false_alarms_before_shift": 0,
+      "limit_width_min": 0.029695165823955715,
+      "limit_width_max": 0.05121985186505491,
+      "size_min": 402,
+      "size_max": 1196
+    },
+    "c": {
+      "center": 6.2,
+      "shift_at": 150,
+      "points_to_detect": 2,
+      "false_alarms_before_shift": 1
+    },
+    "u": {
+      "center": 2.415809362762677,
+      "shift_at": 150,
+      "points_to_detect": 3,
+      "false_alarms_before_shift": 0
+    },
+    "wrong_chart": {
+      "u_chart_violations": 13,
+      "c_chart_violations": 30,
+      "n_points": 200,
+      "area_min": 0.5590702528412425,
+      "area_max": 3.9958087067134063
+    },
+    "np": {
+      "center": 23.925,
+      "shift_at": 140,
+      "points_to_detect": 0,
+      "false_alarms_before_shift": 0
+    }
+  },
+  "variables": {
+    "xbar_r": {
+      "chart": "X-bar (R-based)",
+      "sigma_hat": 0.00983422075231786,
+      "limit_width": 0.026387983329506426,
+      "detections": [
+        {
+          "disturbance": "shift 0.5\u03c3",
+          "detected": true,
+          "points_to_detect": 2
+        },
+        {
+          "disturbance": "shift 2.0\u03c3",
+          "detected": true,
+          "points_to_detect": 0
+        },
+        {
+          "disturbance": "trend 3.0\u03c3",
+          "detected": true,
+          "points_to_detect": 10
+        }
+      ],
+      "n_detected": 3,
+      "n_disturbances": 3
+    },
+    "xbar_s": {
+      "chart": "X-bar (s-based)",
+      "sigma_hat": 0.009785822868938792,
+      "limit_width": 0.026258118180862766,
+      "detections": [
+        {
+          "disturbance": "shift 0.5\u03c3",
+          "detected": true,
+          "points_to_detect": 2
+        },
+        {
+          "disturbance": "shift 2.0\u03c3",
+          "detected": true,
+          "points_to_detect": 0
+        },
+        {
+          "disturbance": "trend 3.0\u03c3",
+          "detected": true,
+          "points_to_detect": 10
+        }
+      ],
+      "n_detected": 3,
+      "n_disturbances": 3
+    },
+    "i_mr": {
+      "chart": "I (individuals)",
+      "sigma_hat": 0.010264301803259306,
+      "limit_width": 0.06158581081955816,
+      "detections": [
+        {
+          "disturbance": "shift 0.5\u03c3",
+          "detected": false,
+          "points_to_detect": null
+        },
+        {
+          "disturbance": "shift 2.0\u03c3",
+          "detected": true,
+          "points_to_detect": 2
+        },
+        {
+          "disturbance": "trend 3.0\u03c3",
+          "detected": true,
+          "points_to_detect": 7
+        }
+      ],
+      "n_detected": 2,
+      "n_disturbances": 3
+    },
+    "sigma_agreement": {
+      "r_based": 0.00983422075231786,
+      "s_based": 0.009785822868938792,
+      "i_mr_based": 0.010264301803259306,
+      "true_process_sigma": 0.01,
+      "true_total_sigma": 0.01019803902718557
+    }
+  },
+  "nonnormal": {
+    "characteristic": "seal_force_N",
+    "skew_parameter": 0.55,
+    "ooc_points_rule1_only": 2,
+    "ooc_points_all_rules": 11,
+    "refused": true,
+    "normality": {
+      "anderson_darling_stat": 25.96390898350137,
+      "critical_value_5pct": 0.784,
+      "normal_at_5pct": false,
+      "skew": 1.8016868730167968,
+      "kurtosis_excess": 6.00839007312797
+    },
+    "method_selected": null,
+    "normal_theory": {
+      "Ppk": 1.0873514895663956,
+      "predicted_ppm": 575.8364324824612,
+      "observed_ppm": 5000.0
+    },
+    "percentile": {
+      "Ppk": 0.7072669884988392,
+      "observed_ppm": 5000.0
+    }
+  },
+  "limit_revision": {
+    "improvement_at": 200,
+    "shift_at": 320,
+    "shift_size_new_sigma": 1.5,
+    "stale_limits": {
+      "sigma_hat": 0.010379884343190676,
+      "limit_width": 0.02785215238795047,
+      "detections_after_shift": 77,
+      "points_to_detect": 3
+    },
+    "revised_limits": {
+      "sigma_hat": 0.005165783339174026,
+      "limit_width": 0.013861251244115635,
+      "detections_after_shift": 80,
+      "points_to_detect": 0
+    },
+    "false_alarms_on_improved_period_with_revised_limits": 3
+  },
+  "wall_seconds": 1.369210299977567
+}

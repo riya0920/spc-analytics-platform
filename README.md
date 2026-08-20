@@ -1,6 +1,6 @@
 # DATA-2 — Statistical Process Control Analytics Platform
 
-**Status: ~20% slice.** The chart engine, the runs-rules engine with measured
+**Status: ~50% slice.** The chart engine, the runs-rules engine with measured
 false-alarm economics, the ARL bake-off, capability with its refusals, and ANOVA
 gauge R&R are built. The quality-engineer dashboard, the alarm disposition
 workflow, and attribute-chart coverage are not.
@@ -157,7 +157,27 @@ operator × part interaction that the range method structurally cannot see. Vari
 components were validated against the generator across 30 seeds (EV 0.0490 vs a
 true 0.050; PV 1.031 vs a true 1.000) and the sum-of-squares identity is checked.
 
-## What is NOT built (the other 80%)
+## Built in the second pass — see [docs/EXTENSIONS.md](docs/EXTENSIONS.md)
+
+`python extend.py` — five gaps this README previously named:
+
+- **Attribute charts (p, np, c, u)**, with the selection tree that decides between
+  them and the cost of getting it wrong: a c chart on varying-area data flags
+  roughly twice as many points as the correct u chart, and none of the extras are
+  process signals.
+- **X̄-s and I-MR exercised.** The three σ̂ estimates agree — and they agree with
+  the **total** (process + gauge) σ, not the process σ alone, which is the same
+  fact the gauge R&R section makes from the other direction.
+- **The non-normal capability path, actually triggered.** It was an untested code
+  path presented as a feature. Running it exposed an interaction: **the runs rules
+  assume symmetry, so a skewed process trips the stability gate and the fallback
+  built for skewed data can never run on skewed data.** Normal theory
+  under-predicts the defect rate **576 vs 5,000 PPM** here.
+- **Phase I / phase II limit revision.** A process improves, nobody revises the
+  limits, and the chart goes quiet — which reads as success and is a chart that has
+  lost the ability to detect anything.
+
+## What is NOT built (the other 50%)
 
 1. **No dashboard.** No charts rendered, no violation annotations, no alarm queue,
    no disposition workflow. Everything is tables in a markdown file. The spec's
