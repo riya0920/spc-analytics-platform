@@ -1,0 +1,633 @@
+{
+  "constants": [
+    {
+      "n": 2,
+      "d2_derived": 1.1283791670955123,
+      "d2_published": 1.128,
+      "d2_abs_err": 0.0003791670955124449,
+      "c4": 0.7978845608028655,
+      "A2_derived": 1.8799712059732505,
+      "A2_published": 1.88,
+      "A2_abs_err": 2.8794026749379142e-05
+    },
+    {
+      "n": 3,
+      "d2_derived": 1.6925687506432687,
+      "d2_published": 1.693,
+      "d2_abs_err": 0.0004312493567313336,
+      "c4": 0.8862269254527579,
+      "A2_derived": 1.0233267079464885,
+      "A2_published": 1.023,
+      "A2_abs_err": 0.00032670794648859136
+    },
+    {
+      "n": 4,
+      "d2_derived": 2.0587507460079277,
+      "d2_published": 2.059,
+      "d2_abs_err": 0.00024925399207242904,
+      "c4": 0.9213177319235613,
+      "A2_derived": 0.7285971858947047,
+      "A2_published": 0.729,
+      "A2_abs_err": 0.0004028141052953016
+    },
+    {
+      "n": 5,
+      "d2_derived": 2.3259289472810396,
+      "d2_published": 2.326,
+      "d2_abs_err": 7.105271896046261e-05,
+      "c4": 0.9399856029866253,
+      "A2_derived": 0.5768193340850857,
+      "A2_published": 0.577,
+      "A2_abs_err": 0.00018066591491427975
+    },
+    {
+      "n": 6,
+      "d2_derived": 2.5344127212229424,
+      "d2_published": 2.534,
+      "d2_abs_err": 0.0004127212229425581,
+      "c4": 0.9515328619481445,
+      "A2_derived": 0.48324602427050917,
+      "A2_published": 0.483,
+      "A2_abs_err": 0.00024602427050918196
+    },
+    {
+      "n": 7,
+      "d2_derived": 2.7043567512138087,
+      "d2_published": 2.704,
+      "d2_abs_err": 0.00035675121380851493,
+      "c4": 0.959368788699833,
+      "A2_derived": 0.41928396411410995,
+      "A2_published": 0.419,
+      "A2_abs_err": 0.00028396411410996913
+    },
+    {
+      "n": 8,
+      "d2_derived": 2.847200612090555,
+      "d2_published": 2.847,
+      "d2_abs_err": 0.00020061209055510787,
+      "c4": 0.9650304561473718,
+      "A2_derived": 0.3725273755827947,
+      "A2_published": 0.373,
+      "A2_abs_err": 0.0004726244172053029
+    },
+    {
+      "n": 9,
+      "d2_derived": 2.9700263244184733,
+      "d2_published": 2.97,
+      "d2_abs_err": 2.6324418473056e-05,
+      "c4": 0.9693106997139542,
+      "A2_derived": 0.33669735240336585,
+      "A2_published": 0.337,
+      "A2_abs_err": 0.00030264759663417573
+    },
+    {
+      "n": 10,
+      "d2_derived": 3.077505461670345,
+      "d2_published": 3.078,
+      "d2_abs_err": 0.0004945383296548478,
+      "c4": 0.9726592741215883,
+      "A2_derived": 0.30826372523660994,
+      "A2_published": 0.308,
+      "A2_abs_err": 0.0002637252366099463
+    }
+  ],
+  "chart_runs": [
+    {
+      "characteristic": "shaft_dia_mm",
+      "n_subgroups": 300,
+      "subgroup_size": 5,
+      "sigma_within_hat": 0.009672127010498188,
+      "sigma_process_true": 0.01,
+      "sigma_gauge_true": 0.002,
+      "limits_correct": {
+        "center": 24.999740665316583,
+        "ucl": 25.012717185406075,
+        "lcl": 24.98676414522709
+      },
+      "limits_naive_overall_sigma": {
+        "center": 25.00527271831663,
+        "ucl": 25.04402676083561,
+        "lcl": 24.966518675797648,
+        "width_ratio": 2.986474205080939
+      },
+      "detections": [
+        {
+          "kind": "shift",
+          "magnitude_sigma": 0.5,
+          "note": "small sustained shift - EWMA/CUSUM territory",
+          "window": "100-140",
+          "detected": true,
+          "subgroups_to_detect": 1,
+          "first_rules": [
+            3
+          ],
+          "detected_by_naive_chart": false,
+          "subgroups_to_detect_naive": null
+        },
+        {
+          "kind": "shift",
+          "magnitude_sigma": 2.0,
+          "note": "large shift - rule 1 should own this",
+          "window": "200-230",
+          "detected": true,
+          "subgroups_to_detect": 0,
+          "first_rules": [
+            1
+          ],
+          "detected_by_naive_chart": true,
+          "subgroups_to_detect_naive": 1
+        },
+        {
+          "kind": "trend",
+          "magnitude_sigma": 3.0,
+          "note": "tool wear ramp",
+          "window": "250-300",
+          "detected": true,
+          "subgroups_to_detect": 7,
+          "first_rules": [
+            3
+          ],
+          "detected_by_naive_chart": true,
+          "subgroups_to_detect_naive": 21
+        }
+      ],
+      "false_alarms_on_clean_subgroups": 3,
+      "clean_subgroups": 180,
+      "false_alarm_rate_clean": 0.016666666666666666,
+      "r_chart_violations": 0
+    },
+    {
+      "characteristic": "wall_thk_mm",
+      "n_subgroups": 250,
+      "subgroup_size": 5,
+      "sigma_within_hat": 0.019796625095037986,
+      "sigma_process_true": 0.02,
+      "sigma_gauge_true": 0.004,
+      "limits_correct": {
+        "center": 1.9999503527779952,
+        "ucl": 2.026510312440545,
+        "lcl": 1.9733903931154453
+      },
+      "limits_naive_overall_sigma": {
+        "center": 2.0002075417875544,
+        "ucl": 2.084841774545793,
+        "lcl": 1.915573309029316,
+        "width_ratio": 3.1865346873088245
+      },
+      "detections": [
+        {
+          "kind": "spread",
+          "magnitude_sigma": 2.5,
+          "note": "variance doubling - R chart, not X-bar",
+          "window": "120-170",
+          "detected": true,
+          "subgroups_to_detect": 4,
+          "first_rules": [
+            1,
+            2
+          ],
+          "detected_by_naive_chart": true,
+          "subgroups_to_detect_naive": 6
+        },
+        {
+          "kind": "cycle",
+          "magnitude_sigma": 1.2,
+          "note": "shift-to-shift cycling",
+          "window": "190-250",
+          "detected": true,
+          "subgroups_to_detect": 4,
+          "first_rules": [
+            1,
+            2,
+            3
+          ],
+          "detected_by_naive_chart": true,
+          "subgroups_to_detect_naive": 5
+        }
+      ],
+      "false_alarms_on_clean_subgroups": 1,
+      "clean_subgroups": 140,
+      "false_alarm_rate_clean": 0.007142857142857143,
+      "r_chart_violations": 31
+    },
+    {
+      "characteristic": "cavity_mix_mm",
+      "n_subgroups": 200,
+      "subgroup_size": 5,
+      "sigma_within_hat": 0.027816509292539923,
+      "sigma_process_true": 0.015,
+      "sigma_gauge_true": 0.003,
+      "limits_correct": {
+        "center": 11.99500967928395,
+        "ucl": 12.032329442688875,
+        "lcl": 11.957689915879024
+      },
+      "limits_naive_overall_sigma": {
+        "center": 11.99553596727266,
+        "ucl": 12.073792379950085,
+        "lcl": 11.917279554595236,
+        "width_ratio": 2.0969160985381996
+      },
+      "detections": [
+        {
+          "kind": "bimodal",
+          "magnitude_sigma": 1.5,
+          "note": "two cavities pooled into one subgroup for the whole run",
+          "window": "0-200",
+          "detected": true,
+          "subgroups_to_detect": 21,
+          "first_rules": [
+            7
+          ],
+          "detected_by_naive_chart": true,
+          "subgroups_to_detect_naive": 25
+        }
+      ],
+      "false_alarms_on_clean_subgroups": 0,
+      "clean_subgroups": 0,
+      "false_alarm_rate_clean": 0.0,
+      "r_chart_violations": 0
+    },
+    {
+      "characteristic": "seal_force_N",
+      "n_subgroups": 200,
+      "subgroup_size": 5,
+      "sigma_within_hat": 5.71075536717314,
+      "sigma_process_true": 6.0,
+      "sigma_gauge_true": 1.2,
+      "limits_correct": {
+        "center": 179.56183307286062,
+        "ucl": 187.22361539518317,
+        "lcl": 171.90005075053807
+      },
+      "limits_naive_overall_sigma": {
+        "center": 180.02616519629612,
+        "ucl": 198.25482150040145,
+        "lcl": 161.7975088921908,
+        "width_ratio": 2.379166561675377
+      },
+      "detections": [],
+      "false_alarms_on_clean_subgroups": 8,
+      "clean_subgroups": 200,
+      "false_alarm_rate_clean": 0.04,
+      "r_chart_violations": 9
+    },
+    {
+      "characteristic": "bore_rough_um",
+      "n_subgroups": 200,
+      "subgroup_size": 5,
+      "sigma_within_hat": 0.08578337920858999,
+      "sigma_process_true": 0.04,
+      "sigma_gauge_true": 0.075,
+      "limits_correct": {
+        "center": 1.5997891588025208,
+        "ucl": 1.7148796391525505,
+        "lcl": 1.4846986784524911
+      },
+      "limits_naive_overall_sigma": {
+        "center": 1.599954066116972,
+        "ucl": 1.8626141996879566,
+        "lcl": 1.3372939325459874,
+        "width_ratio": 2.282205554900327
+      },
+      "detections": [],
+      "false_alarms_on_clean_subgroups": 0,
+      "clean_subgroups": 200,
+      "false_alarm_rate_clean": 0.0,
+      "r_chart_violations": 0
+    }
+  ],
+  "capability": [
+    {
+      "refused": true,
+      "reason": "2 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
+      "out_of_control_points": 2,
+      "whole_series_if_computed_anyway": {
+        "Cpk": 1.5414493501041506,
+        "Ppk": 1.1541320279416813,
+        "Cpk_over_Ppk": 1.3355918671221907,
+        "observed_ppm": 0.0,
+        "expected_ppm_long_term": 277.0923660372202
+      },
+      "characteristic": "shaft_dia_mm"
+    },
+    {
+      "mu": 1.9999503527779952,
+      "sigma_within": 0.019796625095037986,
+      "sigma_overall": 0.019382855492972268,
+      "Cp": 1.0102732109127535,
+      "Cpk": 1.0094372566062912,
+      "Pp": 1.0318397104725623,
+      "Ppk": 1.0309859108862414,
+      "method": "normal",
+      "Cpk_over_Ppk": 0.9790989827771489,
+      "expected_ppm_long_term": 1964.754253819067,
+      "observed_ppm": 2000.0,
+      "normality": {
+        "anderson_darling_stat": 0.25959420717282455,
+        "critical_value_5pct": 0.781,
+        "normal_at_5pct": true,
+        "skew": -0.05518917263000476,
+        "kurtosis_excess": -0.03188976336527949
+      },
+      "refused": false,
+      "whole_series_if_computed_anyway": {
+        "Cpk": 1.0067786457775667,
+        "Ppk": 0.7064807733679781,
+        "Cpk_over_Ppk": 1.42506163469671,
+        "observed_ppm": 43200.0,
+        "expected_ppm_long_term": 33441.57293172483
+      },
+      "characteristic": "wall_thk_mm"
+    },
+    {
+      "refused": true,
+      "reason": "45 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
+      "out_of_control_points": 45,
+      "whole_series_if_computed_anyway": {
+        "Cpk": 0.665503672520538,
+        "Ppk": 0.7096666633772561,
+        "Cpk_over_Ppk": 0.9377693878890274,
+        "observed_ppm": 5000.0,
+        "expected_ppm_long_term": 23358.98766235646
+      },
+      "characteristic": "cavity_mix_mm"
+    },
+    {
+      "refused": true,
+      "reason": "4 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
+      "out_of_control_points": 4,
+      "whole_series_if_computed_anyway": {
+        "Cpk": 1.1689151381159113,
+        "Ppk": 1.0986089628441769,
+        "Cpk_over_Ppk": 1.063995632340118,
+        "observed_ppm": 6000.0,
+        "expected_ppm_long_term": 510.4371595107226
+      },
+      "characteristic": "seal_force_N"
+    },
+    {
+      "mu": 1.5997891588025208,
+      "sigma_within": 0.08578337920858999,
+      "sigma_overall": 0.08713955706378682,
+      "Cp": 0.7771513232716177,
+      "Cpk": 0.7763320456935122,
+      "Pp": 0.7650562949025113,
+      "Ppk": 0.7642497679757302,
+      "method": "normal",
+      "Cpk_over_Ppk": 1.015809331221368,
+      "expected_ppm_long_term": 21723.832491695008,
+      "observed_ppm": 20000.0,
+      "normality": {
+        "anderson_darling_stat": 0.2318523723493513,
+        "critical_value_5pct": 0.781,
+        "normal_at_5pct": true,
+        "skew": 0.07236232576267057,
+        "kurtosis_excess": -0.14808741871388298
+      },
+      "refused": false,
+      "whole_series_if_computed_anyway": {
+        "Cpk": 0.7769728353817267,
+        "Ppk": 0.7612653789461882,
+        "Cpk_over_Ppk": 1.0206333518769528,
+        "observed_ppm": 19000.0,
+        "expected_ppm_long_term": 22352.704255143795
+      },
+      "characteristic": "bore_rough_um"
+    }
+  ],
+  "rule_false_alarm": [
+    {
+      "rule": "1",
+      "description": "1 point beyond 3 sigma (WE)",
+      "p_fires": 0.42033333333333334
+    },
+    {
+      "rule": "2",
+      "description": "2 of 3 consecutive points beyond 2 sigma, same side (WE)",
+      "p_fires": 0.3305
+    },
+    {
+      "rule": "3",
+      "description": "4 of 5 consecutive points beyond 1 sigma, same side (WE)",
+      "p_fires": 0.495
+    },
+    {
+      "rule": "4",
+      "description": "8 consecutive points on one side of the centre line (WE)",
+      "p_fires": 0.54
+    },
+    {
+      "rule": "5",
+      "description": "6 consecutive points steadily increasing or decreasing (Nelson)",
+      "p_fires": 0.06433333333333334
+    },
+    {
+      "rule": "6",
+      "description": "14 consecutive points alternating up and down (Nelson)",
+      "p_fires": 0.178
+    },
+    {
+      "rule": "7",
+      "description": "15 consecutive points within 1 sigma, either side (Nelson: stratification)",
+      "p_fires": 0.17366666666666666
+    },
+    {
+      "rule": "8",
+      "description": "8 consecutive points beyond 1 sigma, either side (Nelson: mixture)",
+      "p_fires": 0.0135
+    },
+    {
+      "rule": "1-8 stacked",
+      "description": "all eight rules together",
+      "p_fires": 0.9363333333333334
+    },
+    {
+      "rule": "1-4 stacked",
+      "description": "classic Western Electric only",
+      "p_fires": 0.8928333333333334
+    }
+  ],
+  "rule_detection_1sigma": [
+    {
+      "rule": "1",
+      "description": "1 point beyond 3 sigma (WE)",
+      "p_fires": 0.9916666666666667
+    },
+    {
+      "rule": "2",
+      "description": "2 of 3 consecutive points beyond 2 sigma, same side (WE)",
+      "p_fires": 0.9995
+    },
+    {
+      "rule": "3",
+      "description": "4 of 5 consecutive points beyond 1 sigma, same side (WE)",
+      "p_fires": 1.0
+    },
+    {
+      "rule": "4",
+      "description": "8 consecutive points on one side of the centre line (WE)",
+      "p_fires": 1.0
+    },
+    {
+      "rule": "5",
+      "description": "6 consecutive points steadily increasing or decreasing (Nelson)",
+      "p_fires": 0.06433333333333334
+    },
+    {
+      "rule": "6",
+      "description": "14 consecutive points alternating up and down (Nelson)",
+      "p_fires": 0.178
+    },
+    {
+      "rule": "7",
+      "description": "15 consecutive points within 1 sigma, either side (Nelson: stratification)",
+      "p_fires": 0.0018333333333333333
+    },
+    {
+      "rule": "8",
+      "description": "8 consecutive points beyond 1 sigma, either side (Nelson: mixture)",
+      "p_fires": 0.41283333333333333
+    },
+    {
+      "rule": "1-8 stacked",
+      "description": "all eight rules together",
+      "p_fires": 1.0
+    },
+    {
+      "rule": "1-4 stacked",
+      "description": "classic Western Electric only",
+      "p_fires": 1.0
+    }
+  ],
+  "calibration": {
+    "ewma_L_calibrated": 2.861328125,
+    "ewma_L_textbook": 2.962,
+    "ewma_arl0_at_calibrated": 366.2828333333333,
+    "ewma_arl0_at_textbook": 487.45666666666665,
+    "cusum_h_calibrated": 4.78125,
+    "cusum_h_textbook": 4.77,
+    "cusum_arl0_at_calibrated": 376.4313333333333
+  },
+  "arl_table": [
+    {
+      "shift_sigma": 0.0,
+      "shewhart_rule1": 374.191,
+      "shewhart_rules1_4": 92.31266666666667,
+      "shewhart_all8": 77.1715,
+      "ewma": 366.2828333333333,
+      "cusum": 376.4313333333333
+    },
+    {
+      "shift_sigma": 0.5,
+      "shewhart_rule1": 156.76233333333334,
+      "shewhart_rules1_4": 27.674,
+      "shewhart_all8": 26.9365,
+      "ewma": 34.952666666666666,
+      "cusum": 35.615
+    },
+    {
+      "shift_sigma": 1.0,
+      "shewhart_rule1": 43.20783333333333,
+      "shewhart_rules1_4": 9.363166666666666,
+      "shewhart_all8": 9.352166666666667,
+      "ewma": 8.657166666666667,
+      "cusum": 9.7665
+    },
+    {
+      "shift_sigma": 1.5,
+      "shewhart_rule1": 14.8105,
+      "shewhart_rules1_4": 5.119833333333333,
+      "shewhart_all8": 5.119666666666666,
+      "ewma": 4.2668333333333335,
+      "cusum": 5.519
+    },
+    {
+      "shift_sigma": 2.0,
+      "shewhart_rule1": 6.170333333333334,
+      "shewhart_rules1_4": 3.4243333333333332,
+      "shewhart_all8": 3.4243333333333332,
+      "ewma": 2.703333333333333,
+      "cusum": 3.8423333333333334
+    },
+    {
+      "shift_sigma": 3.0,
+      "shewhart_rule1": 2.0101666666666667,
+      "shewhart_rules1_4": 1.8168333333333333,
+      "shewhart_all8": 1.8168333333333333,
+      "ewma": 1.5366666666666666,
+      "cusum": 2.4891666666666667
+    }
+  ],
+  "gauge_rr": {
+    "good_gauge": {
+      "parts": 10,
+      "operators": 3,
+      "repeats": 3,
+      "EV_repeatability": 0.03532332118174432,
+      "AV_reproducibility": 0.024916364868152085,
+      "GRR": 0.04322686962470854,
+      "PV_part": 0.9393595135854076,
+      "TV_total": 0.9403535813836011,
+      "pct_GRR_of_TV": 4.596874035520356,
+      "ndc": 30.640592891749446,
+      "interaction_p": 0.033823185414378426,
+      "interaction_kept": true,
+      "verdict_AIAG": "acceptable",
+      "pct_of_process_variation_that_is_gauge": 0.21131250898441203,
+      "pct_GRR_of_tolerance": 4.322686962470854
+    },
+    "marginal_gauge": {
+      "parts": 10,
+      "operators": 3,
+      "repeats": 3,
+      "EV_repeatability": 0.12716395625427954,
+      "AV_reproducibility": 0.08741939902626511,
+      "GRR": 0.1543140405029746,
+      "PV_part": 0.9510718579961948,
+      "TV_total": 0.9635094717586785,
+      "pct_GRR_of_TV": 16.01583015279628,
+      "ndc": 8.690144561076313,
+      "interaction_p": 0.03584087406838672,
+      "interaction_kept": true,
+      "verdict_AIAG": "conditional",
+      "pct_of_process_variation_that_is_gauge": 2.565068154832185,
+      "pct_GRR_of_tolerance": 15.43140405029746
+    },
+    "bad_gauge": {
+      "parts": 10,
+      "operators": 3,
+      "repeats": 3,
+      "EV_repeatability": 0.31790989063569886,
+      "AV_reproducibility": 0.23734614716984956,
+      "GRR": 0.396736552564008,
+      "PV_part": 0.9689141197435687,
+      "TV_total": 1.0469930580375537,
+      "pct_GRR_of_TV": 37.89294967319428,
+      "ndc": 3.4435166107312964,
+      "interaction_p": 0.03403719187675776,
+      "interaction_kept": true,
+      "verdict_AIAG": "UNACCEPTABLE",
+      "pct_of_process_variation_that_is_gauge": 14.358756349352346,
+      "pct_GRR_of_tolerance": 39.6736552564008
+    },
+    "bore_rough_um_study": {
+      "parts": 10,
+      "operators": 3,
+      "repeats": 3,
+      "EV_repeatability": 0.05298498177261647,
+      "AV_reproducibility": 0.032884718592534425,
+      "GRR": 0.06236034806152607,
+      "PV_part": 0.0423673479803599,
+      "TV_total": 0.07539101528195243,
+      "pct_GRR_of_TV": 82.71588839639129,
+      "ndc": 0.9579478387992428,
+      "interaction_p": 0.03382318541437805,
+      "interaction_kept": true,
+      "verdict_AIAG": "UNACCEPTABLE",
+      "pct_of_process_variation_that_is_gauge": 68.41918193204259,
+      "pct_GRR_of_tolerance": 93.54052209228908
+    }
+  },
+  "wall_seconds": 90.8794593999919
+}
