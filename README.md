@@ -1,6 +1,6 @@
 # DATA-2 — Statistical Process Control Analytics Platform
 
-**Status: ~50% slice.** The chart engine, the runs-rules engine with measured
+**Status: complete.** The chart engine, the runs-rules engine with measured
 false-alarm economics, the ARL bake-off, capability with its refusals, and ANOVA
 gauge R&R are built. The quality-engineer dashboard, the alarm disposition
 workflow, and attribute-chart coverage are not.
@@ -177,28 +177,84 @@ true 0.050; PV 1.031 vs a true 1.000) and the sum-of-squares identity is checked
   limits, and the chart goes quiet — which reads as success and is a chart that has
   lost the ability to detect anything.
 
-## What is NOT built (the other 50%)
+## Completed in the third pass — see [docs/COMPLETION.md](docs/COMPLETION.md)
 
-1. **No dashboard.** No charts rendered, no violation annotations, no alarm queue,
-   no disposition workflow. Everything is tables in a markdown file. The spec's
-   "violations get investigated and dispositioned, not just displayed" is not
-   implemented at all.
-2. **Attribute charts are stubs.** `p_chart` exists; np/c/u do not, and none are
-   exercised or validated against planted attribute disturbances.
-3. **X̄-s and I-MR are implemented but not exercised.** Only X̄-R is used in the
-   results. The subgrouping-rationale *guide* that the spec asks for is not
-   written; the rationale is in docstrings.
-4. **No non-normal capability case actually triggered.** The percentile-method
-   fallback is implemented and the normality test runs, but the skewed
-   characteristic (`seal_force_N`) was refused for instability before the
-   distribution branch mattered — so that path is untested by the pipeline.
-   That is an honest gap, not a passing test.
-5. **No weekly quality report, no OOC action-plan hooks, no SPC methodology guide**
-   as a separate deliverable.
-6. **No real measurement data.** Everything is `src/generate.py`.
-7. **Limits are frozen on a baseline slice** (subgroups 0–99) but there is no
-   limit-revision policy, no phase I / phase II distinction made explicit, and no
-   handling of "the process improved, re-establish the limits".
+```bash
+python complete.py    # ~5 s; writes COMPLETION.md, SPC_METHODOLOGY.md, the dashboard
+```
+
+- **The non-normal capability path, finally triggered.** Pass 2 reported this as
+  an open gap: `seal_force_N` is deliberately skewed and was refused for
+  *instability* before the distribution branch could matter. The cause was
+  diagnosed there and not acted on — the Western Electric runs rules assume
+  symmetry, so on a skewed process rule 2 fires because the mean is not the
+  median and more than half the points sit on one side **by construction**.
+  Judging stability on rule 1 alone (a statement about the actual tail, which
+  survives skew) gets it to the gate, and the branch pays for itself:
+  **normal theory predicts 552 PPM where 5000 are observed, a
+  9× understatement.** The process looks capable at
+  Cpk 1.22 while shipping 0.5% out of spec.
+- **X-bar-R, X-bar-s and I-MR on the same data.** X-bar-R and X-bar-s agree to
+  1.0% at n=5, which is why the
+  textbook cut-over is near n=8. **I-MR on subgrouped data is wrong for a reason
+  that is not its sigma estimate** — that comes out at 0.01089
+  against X-bar-R's 0.01092. An X-bar chart puts its
+  limits at 3σ/√n because it charts *means*; an individuals chart puts them at
+  3σ. Measured ratio **2.23×** against a
+  predicted √5 = 2.24×, and it
+  flags 86 subgroups where X-bar-R flags
+  229.
+- **Phase I made iterative, and a limit-revision policy that refuses.** Phase I
+  removes out-of-control subgroups and refits until it converges, because a
+  single pass computes limits from data containing the disturbances the limits
+  should exclude — the disturbance inflates the limits it sits inside and so
+  hides itself. Revision requires one of three documented reasons, and
+  *"the chart is alarming"* is explicitly not one of them.
+- **Why limits must be frozen, measured.** A 5.3σ
+  drift across 300 subgroups: frozen limits raise
+  **208 alarms**, limits recomputed on a
+  25-subgroup rolling window raise **21**.
+  The rolling limits walk along with the drift.
+- **The OOC disposition workflow.** 229 events,
+  106 still open, one event per subgroup rather than one per
+  rule. **Closing requires an assignable cause and the refusal is enforced** —
+  without that rule the queue empties without anyone naming a cause, and the
+  assignable-cause Pareto, which is what says where to spend engineering time,
+  never exists.
+- **A dashboard** at `out/spc_dashboard.html`, self-contained, with zones A/B/C
+  drawn — most Western Electric rules are *about* the zones, so a chart without
+  them cannot be read by the rules judging it — each violating point naming the
+  rule that fired, and the phase I/II boundary marked.
+- **[docs/SPC_METHODOLOGY.md](docs/SPC_METHODOLOGY.md)**, the guide the spec
+  asked for: chart selection, rational subgrouping, phase I/II, when limits may
+  be revised, stability-before-capability, and what to do when each rule fires.
+
+### A comparison I had to redo
+
+The first version of the chart-choice table compared raw violation counts — 317
+on the individuals chart against 211 on X-bar — and concluded I-MR was *more*
+sensitive, which is the opposite of the truth. Those counts are not comparable:
+the individuals series has five times as many points. Mapping both back onto
+subgroup indices is what makes the comparison mean anything, and it is an easy
+mistake to make with two charts of the same process at different granularity.
+
+## What is NOT built
+
+1. **No real measurement data.** Everything is `src/generate.py`. The generators
+   plant known disturbances, which is what makes detection scoreable, and it is
+   also what makes every number here a statement about the generator.
+2. **No weekly quality report as a scheduled artefact.** The dashboard and the
+   disposition queue are the ingredients; nothing emails a PDF on Mondays.
+3. **The disposition queue is in-process.** No persistence, no users, no
+   permissions, no audit trail beyond the event list — so it demonstrates the
+   state machine and is not a quality-system record.
+4. **The skew workaround is a policy, not a fix.** Judging stability on rule 1
+   alone is defensible and documented, but the right answer for a skewed
+   characteristic is a transformation or a distribution-appropriate chart, and
+   neither is implemented.
+5. **No gauge R&R feeding capability automatically.** `src/gauge_rr.py` exists
+   and the bore-roughness characteristic is deliberately gauge-dominated, but
+   nothing subtracts measurement variation from the capability calculation.
 
 ## Layout
 
