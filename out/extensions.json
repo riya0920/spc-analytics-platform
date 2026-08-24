@@ -41,23 +41,23 @@
   "variables": {
     "xbar_r": {
       "chart": "X-bar (R-based)",
-      "sigma_hat": 0.00983422075231786,
-      "limit_width": 0.026387983329506426,
+      "sigma_hat": 0.010432463252525968,
+      "limit_width": 0.027993236406501865,
       "detections": [
         {
           "disturbance": "shift 0.5\u03c3",
           "detected": true,
-          "points_to_detect": 2
+          "points_to_detect": 3
         },
         {
           "disturbance": "shift 2.0\u03c3",
           "detected": true,
-          "points_to_detect": 0
+          "points_to_detect": 1
         },
         {
           "disturbance": "trend 3.0\u03c3",
           "detected": true,
-          "points_to_detect": 10
+          "points_to_detect": 16
         }
       ],
       "n_detected": 3,
@@ -65,23 +65,23 @@
     },
     "xbar_s": {
       "chart": "X-bar (s-based)",
-      "sigma_hat": 0.009785822868938792,
-      "limit_width": 0.026258118180862766,
+      "sigma_hat": 0.010320115100387769,
+      "limit_width": 0.027691774680107528,
       "detections": [
         {
           "disturbance": "shift 0.5\u03c3",
           "detected": true,
-          "points_to_detect": 2
+          "points_to_detect": 3
         },
         {
           "disturbance": "shift 2.0\u03c3",
           "detected": true,
-          "points_to_detect": 0
+          "points_to_detect": 1
         },
         {
           "disturbance": "trend 3.0\u03c3",
           "detected": true,
-          "points_to_detect": 10
+          "points_to_detect": 16
         }
       ],
       "n_detected": 3,
@@ -89,32 +89,32 @@
     },
     "i_mr": {
       "chart": "I (individuals)",
-      "sigma_hat": 0.010264301803259306,
-      "limit_width": 0.06158581081955816,
+      "sigma_hat": 0.009992672351926286,
+      "limit_width": 0.0599560341115577,
       "detections": [
         {
           "disturbance": "shift 0.5\u03c3",
-          "detected": false,
-          "points_to_detect": null
+          "detected": true,
+          "points_to_detect": 0
         },
         {
           "disturbance": "shift 2.0\u03c3",
           "detected": true,
-          "points_to_detect": 2
+          "points_to_detect": 5
         },
         {
           "disturbance": "trend 3.0\u03c3",
           "detected": true,
-          "points_to_detect": 7
+          "points_to_detect": 18
         }
       ],
-      "n_detected": 2,
+      "n_detected": 3,
       "n_disturbances": 3
     },
     "sigma_agreement": {
-      "r_based": 0.00983422075231786,
-      "s_based": 0.009785822868938792,
-      "i_mr_based": 0.010264301803259306,
+      "r_based": 0.010432463252525968,
+      "s_based": 0.010320115100387769,
+      "i_mr_based": 0.009992672351926286,
       "true_process_sigma": 0.01,
       "true_total_sigma": 0.01019803902718557
     }
@@ -122,25 +122,25 @@
   "nonnormal": {
     "characteristic": "seal_force_N",
     "skew_parameter": 0.55,
-    "ooc_points_rule1_only": 2,
-    "ooc_points_all_rules": 11,
+    "ooc_points_rule1_only": 5,
+    "ooc_points_all_rules": 12,
     "refused": true,
     "normality": {
-      "anderson_darling_stat": 25.96390898350137,
+      "anderson_darling_stat": 29.122084729942344,
       "critical_value_5pct": 0.784,
       "normal_at_5pct": false,
-      "skew": 1.8016868730167968,
-      "kurtosis_excess": 6.00839007312797
+      "skew": 2.445174336128292,
+      "kurtosis_excess": 12.449519983948317
     },
     "method_selected": null,
     "normal_theory": {
-      "Ppk": 1.0873514895663956,
-      "predicted_ppm": 575.8364324824612,
-      "observed_ppm": 5000.0
+      "Ppk": 1.0817885377409298,
+      "predicted_ppm": 614.5018300510527,
+      "observed_ppm": 7000.0
     },
     "percentile": {
-      "Ppk": 0.7072669884988392,
-      "observed_ppm": 5000.0
+      "Ppk": 0.592629668894124,
+      "observed_ppm": 7000.0
     }
   },
   "limit_revision": {
@@ -148,18 +148,18 @@
     "shift_at": 320,
     "shift_size_new_sigma": 1.5,
     "stale_limits": {
-      "sigma_hat": 0.010379884343190676,
-      "limit_width": 0.02785215238795047,
+      "sigma_hat": 0.010572032912669312,
+      "limit_width": 0.02836774110371465,
       "detections_after_shift": 77,
       "points_to_detect": 3
     },
     "revised_limits": {
-      "sigma_hat": 0.005165783339174026,
-      "limit_width": 0.013861251244115635,
+      "sigma_hat": 0.005248126458886067,
+      "limit_width": 0.014082201019903096,
       "detections_after_shift": 80,
       "points_to_detect": 0
     },
-    "false_alarms_on_improved_period_with_revised_limits": 3
+    "false_alarms_on_improved_period_with_revised_limits": 4
   },
-  "wall_seconds": 1.369210299977567
+  "wall_seconds": 1.2048571000341326
 }

@@ -9,24 +9,24 @@ Pass 2 reported this as an honest gap: `seal_force_N` is deliberately skewed (sk
 | rule 1 | 0 |
 | rule 2 | 0 |
 | rule 3 | 0 |
-| rule 4 | 1 |
+| rule 4 | 0 |
 | rule 5 | 0 |
 | rule 6 | 0 |
-| rule 7 | 77 |
+| rule 7 | 129 |
 | rule 8 | 0 |
 
-**78 violations under the full rule set, 0 under rule 1 alone.** On a skewed distribution the mean is not the median, so more than half the points sit on one side of centre *by construction* and rule 2 fires on the shape rather than on the process. Rule 1 is a statement about the actual tail and survives skew; rules 2–8 are statements about symmetry.
+**129 violations under the full rule set, 0 under rule 1 alone.** On a skewed distribution the mean is not the median, so more than half the points sit on one side of centre *by construction* and rule 2 fires on the shape rather than on the process. Rule 1 is a statement about the actual tail and survives skew; rules 2–8 are statements about symmetry.
 
 With stability judged on rule 1, the gate passes and the distribution branch runs: Anderson–Darling rejects normality at 5%, so the **percentile** method is used.
 
 | | value |
 |---|---|
-| normal-theory Cpk | 1.216 |
-| normal-theory predicted PPM | 552 |
-| percentile Ppk (ISO 21747) | 0.823 |
-| **observed PPM out of spec** | **5000** |
+| normal-theory Cpk | 1.093 |
+| normal-theory predicted PPM | 586 |
+| percentile Ppk (ISO 21747) | 0.783 |
+| **observed PPM out of spec** | **4000** |
 
-**Normal theory understates the defect rate by 9×.** That gap is the entire reason the branch exists. Cpk converts a ratio into a PPM through a normal tail; when the tail is not normal the PPM is fiction, and here it is fiction in the dangerous direction — the process looks capable (Cpk 1.22) while shipping 0.5% out of spec.
+**Normal theory understates the defect rate by 7×.** That gap is the entire reason the branch exists. Cpk converts a ratio into a PPM through a normal tail; when the tail is not normal the PPM is fiction, and here it is fiction in the dangerous direction — the process looks capable (Cpk 1.09) while shipping 0.4% out of spec.
 
 ## 2. X-bar-R vs X-bar-s vs I-MR
 
@@ -34,13 +34,13 @@ Same characteristic (`shaft_dia_mm`, n=5), three charts:
 
 | chart | sigma estimate | limit half-width | subgroups flagged | planted disturbances caught |
 |---|---|---|---|---|
-| X-bar-R | 0.01092 | 0.01465 | 229 | **3/3** |
-| X-bar-s | 0.01082 | — | 229 | 3/3 |
-| **I-MR (wrong chart here)** | 0.01089 | 0.03266 | 86 | **3/3** |
+| X-bar-R | 0.01043 | 0.01400 | 171 | **3/3** |
+| X-bar-s | 0.01032 | — | 171 | 3/3 |
+| **I-MR (wrong chart here)** | 0.01050 | 0.03151 | 76 | **3/3** |
 
-X-bar-R and X-bar-s agree to 1.0% — at n=5 the range is nearly as efficient as s, which is why the textbook cut-over sits around n=8 rather than at n=2. Both are correct here; the choice between them is efficiency, not validity.
+X-bar-R and X-bar-s agree to 1.1% — at n=5 the range is nearly as efficient as s, which is why the textbook cut-over sits around n=8 rather than at n=2. Both are correct here; the choice between them is efficiency, not validity.
 
-**I-MR is the one that is wrong, and the mechanism is the limit width, not the sigma estimate.** Its sigma is fine — 0.01089 against X-bar-R's 0.01092. But an X-bar chart puts its limits at 3σ/√n because it charts MEANS, while an individuals chart puts them at 3σ. The measured ratio is **2.23×** against a predicted √5 = 2.24×. So the individuals chart is inherently less sensitive to a shift in the mean, by construction and no matter how well sigma is estimated.
+**I-MR is the one that is wrong, and the mechanism is the limit width, not the sigma estimate.** Its sigma is fine — 0.01050 against X-bar-R's 0.01043. But an X-bar chart puts its limits at 3σ/√n because it charts MEANS, while an individuals chart puts them at 3σ. The measured ratio is **2.25×** against a predicted √5 = 2.24×. So the individuals chart is inherently less sensitive to a shift in the mean, by construction and no matter how well sigma is estimated.
 
 (My first version of this table compared raw violation counts — 317 on the individuals chart against 211 on X-bar — and concluded the opposite. Those counts are not comparable: the individuals series has 5× as many points. Mapping both back onto subgroup indices is what makes the comparison mean anything.)
 
@@ -48,7 +48,7 @@ I-MR is the right chart where a subgroup is meaningless — `bore_rough_um` is t
 
 ## 3. Phase I, and a limit-revision policy that refuses
 
-Phase I is **iterative**: remove out-of-control subgroups, refit, repeat. Converged in 1 rounds, keeping 118 of 120 subgroups (1.7% removed), usable = **True**.
+Phase I is **iterative**: remove out-of-control subgroups, refit, repeat. Converged in 2 rounds, keeping 118 of 120 subgroups (1.7% removed), usable = **True**.
 
 A single pass would compute limits from data containing the very disturbances the limits should exclude — the disturbance inflates the limits it sits inside, and so hides itself.
 
@@ -59,17 +59,17 @@ A single pass would compute limits from data containing the very disturbances th
 | improvement, only 8 subgroups | no | only 8 subgroups; 25 required |
 | variation got worse | no | variation did not decrease |
 
-**And the reason limits must be frozen, measured.** A drift of 5.3σ injected across 300 subgroups: frozen limits raise **208 alarms**, limits recomputed on a 25-subgroup rolling window raise **21**. The rolling limits walk along with the drift. A control chart that adapts to the process is not a control chart.
+**And the reason limits must be frozen, measured.** A drift of 5.8σ injected across 300 subgroups: frozen limits raise **211 alarms**, limits recomputed on a 25-subgroup rolling window raise **42**. The rolling limits walk along with the drift. A control chart that adapts to the process is not a control chart.
 
 ## 4. The disposition workflow
 
-**229 OOC events, 106 still open.** One event per subgroup, not one per rule — raising a duplicate for every rule that fired on the same physical excursion is how an alarm queue becomes something operators stop reading.
+**171 OOC events, 80 still open.** One event per subgroup, not one per rule — raising a duplicate for every rule that fired on the same physical excursion is how an alarm queue becomes something operators stop reading.
 
 | state | count |
 |---|---|
-| ASSIGNED | 30 |
-| CLOSED | 123 |
-| OPEN | 76 |
+| ASSIGNED | 23 |
+| CLOSED | 91 |
+| OPEN | 57 |
 
 **Closing requires an assignable cause**, and the refusal is real: `cannot close without an assignable cause -- an OOC queue that can be emptied without naming causes produces no Pareto, a`
 
@@ -77,16 +77,16 @@ That constraint is the mechanism. Without it the queue empties without anyone na
 
 | assignable cause | events |
 |---|---|
-| tool wear | 31 |
-| material lot change | 31 |
-| gauge drift | 31 |
-| setup error | 30 |
+| tool wear | 23 |
+| material lot change | 23 |
+| gauge drift | 23 |
+| setup error | 22 |
 
 ## 5. Dashboard and methodology guide
 
-`out/spc_dashboard.html`, 44 KB, self-contained. Zones A/B/C are drawn, because most Western Electric rules are *about* the zones and a chart without them cannot be read by the rules judging it. Each violating point names the rule that fired, and the phase I/II boundary is marked.
+`out/spc_dashboard.html`, 43 KB, self-contained. Zones A/B/C are drawn, because most Western Electric rules are *about* the zones and a chart without them cannot be read by the rules judging it. Each violating point names the rule that fired, and the phase I/II boundary is marked.
 
 `docs/SPC_METHODOLOGY.md` is the guide the spec asked for — chart selection, rational subgrouping, phase I/II, when limits may be revised, stability-before-capability, and what to do when each rule fires. Every decision in it was already made somewhere in this codebase, in a docstring, where nobody implementing a chart would have found it.
 
 ---
-*Generated in 3s.*
+*Generated in 2s.*

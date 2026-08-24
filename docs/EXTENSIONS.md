@@ -30,11 +30,11 @@ Each chart scored against a planted shift:
 
 | chart | σ̂ | limit width | disturbances detected |
 |---|---|---|---|
-| X-bar (R-based) | 0.00983 | 0.02639 | 3/3 |
-| X-bar (s-based) | 0.00979 | 0.02626 | 3/3 |
-| I (individuals) | 0.01026 | 0.06159 | 2/3 |
+| X-bar (R-based) | 0.01043 | 0.02799 | 3/3 |
+| X-bar (s-based) | 0.01032 | 0.02769 | 3/3 |
+| I (individuals) | 0.00999 | 0.05996 | 3/3 |
 
-**The three σ̂ estimates agree**: R-based 0.00983, s-based 0.00979, I-MR 0.01026, against a true process σ of 0.01000 and a true total (process + gauge) σ of 0.01020.
+**The three σ̂ estimates agree**: R-based 0.01043, s-based 0.01032, I-MR 0.00999, against a true process σ of 0.01000 and a true total (process + gauge) σ of 0.01020.
 
 They agree with the **total**, not with the process alone — which is exactly right and worth noticing: a control chart sees what the gauge reports, so its σ̂ includes measurement variation. That is the same fact the gauge R&R section is about, arriving from the other direction, and it is why capability computed off a chart is capability *of the measured process*.
 
@@ -44,7 +44,7 @@ They agree with the **total**, not with the process alone — which is exactly r
 
 In the first build this was an **untested code path presented as a feature**: the skewed characteristic was refused for instability before the distribution branch ever ran. Here it is exercised on a *stable* skewed process, which is the only situation where the question is even meaningful — capability on an unstable process is still refused.
 
-`seal_force_N`, skew parameter 0.55. Out-of-control points: **2 under rule 1 alone**, **11 with all eight rules**. `assess()` refused: **True**.
+`seal_force_N`, skew parameter 0.55. Out-of-control points: **5 under rule 1 alone**, **12 with all eight rules**. `assess()` refused: **True**.
 
 **The gap between those two counts is the finding, and it explains why this path was unreachable in the first build.** The runs rules assume a *symmetric* in-control distribution; on a skewed process they fire on the skew itself. So the stability gate refuses, and the non-normal capability branch — the one built specifically for skewed data — can never run on skewed data. Even rule 1 alone over-fires here.
 
@@ -52,18 +52,18 @@ In the first build this was an **untested code path presented as a feature**: th
 
 | | |
 |---|---|
-| Anderson–Darling statistic | 25.964 |
+| Anderson–Darling statistic | 29.122 |
 | critical value (5%) | 0.784 |
 | normal at 5%? | False |
-| sample skew | 1.802 |
+| sample skew | 2.445 |
 | **method selected** | **None** |
 
 | method | Ppk | predicted PPM | observed PPM |
 |---|---|---|---|
-| normal theory | 1.087 | 576 | 5,000 |
-| percentile (ISO 21747 style) | 0.707 | — | 5,000 |
+| normal theory | 1.082 | 615 | 7,000 |
+| percentile (ISO 21747 style) | 0.593 | — | 7,000 |
 
-**Normal theory mis-predicts the defect rate by -4,424 PPM** on this characteristic. That is the whole reason the branch exists: Ppk's value comes from converting a ratio into a tail probability, and on a skewed distribution that conversion runs through a tail that is not there. The percentile method keeps the interpretation — what fraction of the tolerance the process uses — without borrowing the normal tail.
+**Normal theory mis-predicts the defect rate by -6,385 PPM** on this characteristic. That is the whole reason the branch exists: Ppk's value comes from converting a ratio into a tail probability, and on a skewed distribution that conversion runs through a tail that is not there. The percentile method keeps the interpretation — what fraction of the tolerance the process uses — without borrowing the normal tail.
 
 ## 4. Phase I / phase II, and what stale limits cost
 
@@ -73,8 +73,8 @@ The scenario: the process **genuinely improves** at subgroup 200 (σ halves), an
 
 | limits | σ̂ | limit width | points to detect the shift | detections after it |
 |---|---|---|---|---|
-| phase I, never revised | 0.01038 | 0.02785 | 3 | 77 |
-| revised after the improvement | 0.00517 | 0.01386 | 0 | 80 |
+| phase I, never revised | 0.01057 | 0.02837 | 3 | 77 |
+| revised after the improvement | 0.00525 | 0.01408 | 0 | 80 |
 
 **Stale limits are 2.0× too wide after the improvement**, and the consequence is the one nobody reports because it looks like success: the chart goes quiet. A quiet chart reads as a healthy process, and is in fact a chart that has lost the ability to detect anything — the improvement made the process better and the unrevised limits made the monitoring worse.
 

@@ -22,11 +22,11 @@ Worst absolute disagreement on d2: 4.95e-04 — i.e. the published table rounded
 
 | characteristic | correct limit width | naive limit width | ratio | disturbances detected (correct) | detected (naive) |
 |---|---|---|---|---|---|
-| shaft_dia_mm | 0.0260 | 0.0775 | 2.99x | 3/3 | 2/3 |
-| wall_thk_mm | 0.0531 | 0.1693 | 3.19x | 2/2 | 2/2 |
-| cavity_mix_mm | 0.0746 | 0.1565 | 2.10x | 1/1 | 1/1 |
-| seal_force_N | 15.3236 | 36.4573 | 2.38x | 0/0 | 0/0 |
-| bore_rough_um | 0.2302 | 0.5253 | 2.28x | 0/0 | 0/0 |
+| shaft_dia_mm | 0.0280 | 0.0789 | 2.82x | 3/3 | 3/3 |
+| wall_thk_mm | 0.0553 | 0.1826 | 3.30x | 2/2 | 2/2 |
+| cavity_mix_mm | 0.0774 | 0.1605 | 2.07x | 1/1 | 1/1 |
+| seal_force_N | 16.3730 | 36.8612 | 2.25x | 0/0 | 0/0 |
+| bore_rough_um | 0.2317 | 0.5248 | 2.27x | 0/0 | 0/0 |
 
 The ratio column is the whole argument. Overall sigma contains the very between-subgroup variation the chart exists to detect, so a disturbed process widens its own limits and then looks calm inside them. Note the direction of the effect: it is worst exactly when the process is worst.
 
@@ -34,12 +34,12 @@ The ratio column is the whole argument. Overall sigma contains the very between-
 
 | characteristic | disturbance | detected | subgroups to detect | first rule(s) | naive chart |
 |---|---|---|---|---|---|
-| shaft_dia_mm | shift 0.5σ (small sustained shift - EWMA/CUSUM territory) | yes | 1 | 3 | **missed** |
-| shaft_dia_mm | shift 2.0σ (large shift - rule 1 should own this) | yes | 0 | 1 | yes, +1 subgroups |
-| shaft_dia_mm | trend 3.0σ (tool wear ramp) | yes | 7 | 3 | yes, +21 subgroups |
-| wall_thk_mm | spread 2.5σ (variance doubling - R chart, not X-bar) | yes | 4 | 1,2 | yes, +6 subgroups |
-| wall_thk_mm | cycle 1.2σ (shift-to-shift cycling) | yes | 4 | 1,2,3 | yes, +5 subgroups |
-| cavity_mix_mm | bimodal 1.5σ (two cavities pooled into one subgroup for the whole run) | yes | 21 | 7 | yes, +25 subgroups |
+| shaft_dia_mm | shift 0.5σ (small sustained shift - EWMA/CUSUM territory) | yes | 3 | 1 | yes, +18 subgroups |
+| shaft_dia_mm | shift 2.0σ (large shift - rule 1 should own this) | yes | 1 | 1,2 | yes, +2 subgroups |
+| shaft_dia_mm | trend 3.0σ (tool wear ramp) | yes | 16 | 3 | yes, +22 subgroups |
+| wall_thk_mm | spread 2.5σ (variance doubling - R chart, not X-bar) | yes | 6 | 1 | yes, +7 subgroups |
+| wall_thk_mm | cycle 1.2σ (shift-to-shift cycling) | yes | 6 | 3 | yes, +13 subgroups |
+| cavity_mix_mm | bimodal 1.5σ (two cavities pooled into one subgroup for the whole run) | yes | 26 | 7 | yes, +26 subgroups |
 
 ## 3. Per-rule economics: what each rule costs and what it buys
 
@@ -81,11 +81,11 @@ At a 1σ shift, EWMA signals in 8.7 points and CUSUM in 9.8, against 43.2 for a 
 
 | characteristic | verdict | Cp | Cpk | Pp | Ppk | method |
 |---|---|---|---|---|---|---|
-| shaft_dia_mm | **REFUSED** (2 OOC points) | — | — | — | — | — |
-| wall_thk_mm | computed | 1.01 | 1.01 | 1.03 | 1.03 | normal |
-| cavity_mix_mm | **REFUSED** (45 OOC points) | — | — | — | — | — |
-| seal_force_N | **REFUSED** (4 OOC points) | — | — | — | — | — |
-| bore_rough_um | computed | 0.78 | 0.78 | 0.77 | 0.76 | normal |
+| shaft_dia_mm | **REFUSED** (5 OOC points) | — | — | — | — | — |
+| wall_thk_mm | **REFUSED** (2 OOC points) | — | — | — | — | — |
+| cavity_mix_mm | **REFUSED** (12 OOC points) | — | — | — | — | — |
+| seal_force_N | computed | — | — | 1.05 | 0.79 | percentile (ISO 21747 style) |
+| bore_rough_um | **REFUSED** (2 OOC points) | — | — | — | — | — |
 
 A refusal is a feature. `capability.assess()` raises `NotInControl` rather than returning a number with a footnote, because Cpk converts a mean and a sigma into a tail probability, and an unstable process has neither. The footnote gets deleted on the way to the customer; the number does not.
 
@@ -95,11 +95,11 @@ Numbers a tool without the gate would have printed:
 
 | characteristic | Cpk | Ppk | Cpk/Ppk | predicted PPM | observed PPM |
 |---|---|---|---|---|---|
-| shaft_dia_mm | 1.54 | 1.15 | 1.34 | 277 | 0 |
-| wall_thk_mm | 1.01 | 0.71 | 1.43 | 33,442 | 43,200 |
-| cavity_mix_mm | 0.67 | 0.71 | 0.94 | 23,359 | 5,000 |
-| seal_force_N | 1.17 | 1.10 | 1.06 | 510 | 6,000 |
-| bore_rough_um | 0.78 | 0.76 | 1.02 | 22,353 | 19,000 |
+| shaft_dia_mm | 1.41 | 1.12 | 1.26 | 399 | 2,000 |
+| wall_thk_mm | 0.96 | 0.65 | 1.48 | 48,695 | 52,800 |
+| cavity_mix_mm | 0.64 | 0.69 | 0.93 | 27,070 | 4,000 |
+| seal_force_N | 1.09 | 1.09 | 1.01 | 586 | 4,000 |
+| bore_rough_um | 0.77 | 0.76 | 1.01 | 22,245 | 23,000 |
 
 The Cpk/Ppk column is the diagnostic. A ratio near 1 means the process is not moving: short-term and long-term spread agree. A large ratio means the process is capable within a subgroup and is not staying put between them — and the action that follows is completely different. Chasing spread on a drifting process is how improvement budgets get spent on the wrong thing.
 

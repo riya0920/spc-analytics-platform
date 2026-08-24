@@ -6,3 +6,6 @@ __pycache__/
 *.db-shm
 *.onnx
 out/*.log
+
+out/quality.db
+out/rerun*.log

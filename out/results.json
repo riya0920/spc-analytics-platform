@@ -96,19 +96,19 @@
       "characteristic": "shaft_dia_mm",
       "n_subgroups": 300,
       "subgroup_size": 5,
-      "sigma_within_hat": 0.009672127010498188,
+      "sigma_within_hat": 0.010432463252525968,
       "sigma_process_true": 0.01,
       "sigma_gauge_true": 0.002,
       "limits_correct": {
-        "center": 24.999740665316583,
-        "ucl": 25.012717185406075,
-        "lcl": 24.98676414522709
+        "center": 25.000753274188813,
+        "ucl": 25.014749892392064,
+        "lcl": 24.986756655985563
       },
       "limits_naive_overall_sigma": {
-        "center": 25.00527271831663,
-        "ucl": 25.04402676083561,
-        "lcl": 24.966518675797648,
-        "width_ratio": 2.986474205080939
+        "center": 25.005801410113165,
+        "ucl": 25.045252565599903,
+        "lcl": 24.966350254626427,
+        "width_ratio": 2.818620534892828
       },
       "detections": [
         {
@@ -117,12 +117,12 @@
           "note": "small sustained shift - EWMA/CUSUM territory",
           "window": "100-140",
           "detected": true,
-          "subgroups_to_detect": 1,
+          "subgroups_to_detect": 3,
           "first_rules": [
-            3
+            1
           ],
-          "detected_by_naive_chart": false,
-          "subgroups_to_detect_naive": null
+          "detected_by_naive_chart": true,
+          "subgroups_to_detect_naive": 18
         },
         {
           "kind": "shift",
@@ -130,12 +130,13 @@
           "note": "large shift - rule 1 should own this",
           "window": "200-230",
           "detected": true,
-          "subgroups_to_detect": 0,
+          "subgroups_to_detect": 1,
           "first_rules": [
-            1
+            1,
+            2
           ],
           "detected_by_naive_chart": true,
-          "subgroups_to_detect_naive": 1
+          "subgroups_to_detect_naive": 2
         },
         {
           "kind": "trend",
@@ -143,36 +144,36 @@
           "note": "tool wear ramp",
           "window": "250-300",
           "detected": true,
-          "subgroups_to_detect": 7,
+          "subgroups_to_detect": 16,
           "first_rules": [
             3
           ],
           "detected_by_naive_chart": true,
-          "subgroups_to_detect_naive": 21
+          "subgroups_to_detect_naive": 22
         }
       ],
-      "false_alarms_on_clean_subgroups": 3,
+      "false_alarms_on_clean_subgroups": 15,
       "clean_subgroups": 180,
-      "false_alarm_rate_clean": 0.016666666666666666,
-      "r_chart_violations": 0
+      "false_alarm_rate_clean": 0.08333333333333333,
+      "r_chart_violations": 1
     },
     {
       "characteristic": "wall_thk_mm",
       "n_subgroups": 250,
       "subgroup_size": 5,
-      "sigma_within_hat": 0.019796625095037986,
+      "sigma_within_hat": 0.020609560320423402,
       "sigma_process_true": 0.02,
       "sigma_gauge_true": 0.004,
       "limits_correct": {
-        "center": 1.9999503527779952,
-        "ucl": 2.026510312440545,
-        "lcl": 1.9733903931154453
+        "center": 2.0009130001954674,
+        "ucl": 2.0285636269131766,
+        "lcl": 1.973262373477758
       },
       "limits_naive_overall_sigma": {
-        "center": 2.0002075417875544,
-        "ucl": 2.084841774545793,
-        "lcl": 1.915573309029316,
-        "width_ratio": 3.1865346873088245
+        "center": 2.0005559355217244,
+        "ucl": 2.091853358015018,
+        "lcl": 1.9092585130284307,
+        "width_ratio": 3.3018210916290207
       },
       "detections": [
         {
@@ -181,13 +182,12 @@
           "note": "variance doubling - R chart, not X-bar",
           "window": "120-170",
           "detected": true,
-          "subgroups_to_detect": 4,
+          "subgroups_to_detect": 6,
           "first_rules": [
-            1,
-            2
+            1
           ],
           "detected_by_naive_chart": true,
-          "subgroups_to_detect_naive": 6
+          "subgroups_to_detect_naive": 7
         },
         {
           "kind": "cycle",
@@ -195,38 +195,36 @@
           "note": "shift-to-shift cycling",
           "window": "190-250",
           "detected": true,
-          "subgroups_to_detect": 4,
+          "subgroups_to_detect": 6,
           "first_rules": [
-            1,
-            2,
             3
           ],
           "detected_by_naive_chart": true,
-          "subgroups_to_detect_naive": 5
+          "subgroups_to_detect_naive": 13
         }
       ],
-      "false_alarms_on_clean_subgroups": 1,
+      "false_alarms_on_clean_subgroups": 2,
       "clean_subgroups": 140,
-      "false_alarm_rate_clean": 0.007142857142857143,
+      "false_alarm_rate_clean": 0.014285714285714285,
       "r_chart_violations": 31
     },
     {
       "characteristic": "cavity_mix_mm",
       "n_subgroups": 200,
       "subgroup_size": 5,
-      "sigma_within_hat": 0.027816509292539923,
+      "sigma_within_hat": 0.028851209409562147,
       "sigma_process_true": 0.015,
       "sigma_gauge_true": 0.003,
       "limits_correct": {
-        "center": 11.99500967928395,
-        "ucl": 12.032329442688875,
-        "lcl": 11.957689915879024
+        "center": 11.996313392326535,
+        "ucl": 12.035021351610252,
+        "lcl": 11.957605433042817
       },
       "limits_naive_overall_sigma": {
-        "center": 11.99553596727266,
-        "ucl": 12.073792379950085,
-        "lcl": 11.917279554595236,
-        "width_ratio": 2.0969160985381996
+        "center": 11.995386200542256,
+        "ucl": 12.075641867993978,
+        "lcl": 11.915130533090535,
+        "width_ratio": 2.073363435759334
       },
       "detections": [
         {
@@ -235,12 +233,12 @@
           "note": "two cavities pooled into one subgroup for the whole run",
           "window": "0-200",
           "detected": true,
-          "subgroups_to_detect": 21,
+          "subgroups_to_detect": 26,
           "first_rules": [
             7
           ],
           "detected_by_naive_chart": true,
-          "subgroups_to_detect_naive": 25
+          "subgroups_to_detect_naive": 26
         }
       ],
       "false_alarms_on_clean_subgroups": 0,
@@ -252,146 +250,128 @@
       "characteristic": "seal_force_N",
       "n_subgroups": 200,
       "subgroup_size": 5,
-      "sigma_within_hat": 5.71075536717314,
+      "sigma_within_hat": 6.10184960121412,
       "sigma_process_true": 6.0,
       "sigma_gauge_true": 1.2,
       "limits_correct": {
-        "center": 179.56183307286062,
-        "ucl": 187.22361539518317,
-        "lcl": 171.90005075053807
+        "center": 180.16545893967907,
+        "ucl": 188.35194923775592,
+        "lcl": 171.97896864160222
       },
       "limits_naive_overall_sigma": {
-        "center": 180.02616519629612,
-        "ucl": 198.25482150040145,
-        "lcl": 161.7975088921908,
-        "width_ratio": 2.379166561675377
+        "center": 180.01051273925714,
+        "ucl": 198.44111374822103,
+        "lcl": 161.57991173029325,
+        "width_ratio": 2.251343413097743
       },
       "detections": [],
-      "false_alarms_on_clean_subgroups": 8,
+      "false_alarms_on_clean_subgroups": 1,
       "clean_subgroups": 200,
-      "false_alarm_rate_clean": 0.04,
-      "r_chart_violations": 9
+      "false_alarm_rate_clean": 0.005,
+      "r_chart_violations": 3
     },
     {
       "characteristic": "bore_rough_um",
       "n_subgroups": 200,
       "subgroup_size": 5,
-      "sigma_within_hat": 0.08578337920858999,
+      "sigma_within_hat": 0.08634632672362523,
       "sigma_process_true": 0.04,
       "sigma_gauge_true": 0.075,
       "limits_correct": {
-        "center": 1.5997891588025208,
-        "ucl": 1.7148796391525505,
-        "lcl": 1.4846986784524911
+        "center": 1.6027744174484984,
+        "ucl": 1.718620171145358,
+        "lcl": 1.4869286637516388
       },
       "limits_naive_overall_sigma": {
-        "center": 1.599954066116972,
-        "ucl": 1.8626141996879566,
-        "lcl": 1.3372939325459874,
-        "width_ratio": 2.282205554900327
+        "center": 1.5982991612234678,
+        "ucl": 1.8606989070695092,
+        "lcl": 1.3358994153774264,
+        "width_ratio": 2.2650786711844297
       },
       "detections": [],
-      "false_alarms_on_clean_subgroups": 0,
+      "false_alarms_on_clean_subgroups": 2,
       "clean_subgroups": 200,
-      "false_alarm_rate_clean": 0.0,
+      "false_alarm_rate_clean": 0.01,
       "r_chart_violations": 0
     }
   ],
   "capability": [
     {
       "refused": true,
-      "reason": "2 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
-      "out_of_control_points": 2,
+      "reason": "5 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
+      "out_of_control_points": 5,
       "whole_series_if_computed_anyway": {
-        "Cpk": 1.5414493501041506,
-        "Ppk": 1.1541320279416813,
-        "Cpk_over_Ppk": 1.3355918671221907,
-        "observed_ppm": 0.0,
-        "expected_ppm_long_term": 277.0923660372202
+        "Cpk": 1.412213294117743,
+        "Ppk": 1.1203370178014753,
+        "Cpk_over_Ppk": 1.2605254237595749,
+        "observed_ppm": 2000.0,
+        "expected_ppm_long_term": 399.3000005846274
       },
       "characteristic": "shaft_dia_mm"
     },
     {
-      "mu": 1.9999503527779952,
-      "sigma_within": 0.019796625095037986,
-      "sigma_overall": 0.019382855492972268,
-      "Cp": 1.0102732109127535,
-      "Cpk": 1.0094372566062912,
-      "Pp": 1.0318397104725623,
-      "Ppk": 1.0309859108862414,
-      "method": "normal",
-      "Cpk_over_Ppk": 0.9790989827771489,
-      "expected_ppm_long_term": 1964.754253819067,
-      "observed_ppm": 2000.0,
-      "normality": {
-        "anderson_darling_stat": 0.25959420717282455,
-        "critical_value_5pct": 0.781,
-        "normal_at_5pct": true,
-        "skew": -0.05518917263000476,
-        "kurtosis_excess": -0.03188976336527949
-      },
-      "refused": false,
+      "refused": true,
+      "reason": "2 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
+      "out_of_control_points": 2,
       "whole_series_if_computed_anyway": {
-        "Cpk": 1.0067786457775667,
-        "Ppk": 0.7064807733679781,
-        "Cpk_over_Ppk": 1.42506163469671,
-        "observed_ppm": 43200.0,
-        "expected_ppm_long_term": 33441.57293172483
+        "Cpk": 0.9614318719739746,
+        "Ppk": 0.6511034249914572,
+        "Cpk_over_Ppk": 1.4766192820850068,
+        "observed_ppm": 52800.0,
+        "expected_ppm_long_term": 48695.37420880917
       },
       "characteristic": "wall_thk_mm"
     },
     {
       "refused": true,
-      "reason": "45 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
-      "out_of_control_points": 45,
+      "reason": "12 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
+      "out_of_control_points": 12,
       "whole_series_if_computed_anyway": {
-        "Cpk": 0.665503672520538,
-        "Ppk": 0.7096666633772561,
-        "Cpk_over_Ppk": 0.9377693878890274,
-        "observed_ppm": 5000.0,
-        "expected_ppm_long_term": 23358.98766235646
+        "Cpk": 0.6399061677220405,
+        "Ppk": 0.6901219851616692,
+        "Cpk_over_Ppk": 0.9272363168840866,
+        "observed_ppm": 4000.0,
+        "expected_ppm_long_term": 27070.201825960576
       },
       "characteristic": "cavity_mix_mm"
     },
     {
-      "refused": true,
-      "reason": "4 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
-      "out_of_control_points": 4,
+      "mu": 180.16545893967907,
+      "median": 178.95737896909344,
+      "p0.135": 169.02822274524195,
+      "p99.865": 212.05898533236206,
+      "Pp_percentile": 1.0457634792990937,
+      "Ppk_percentile": 0.7867479525043504,
+      "observed_ppm": 4000.0,
+      "method": "percentile (ISO 21747 style)",
+      "note": "Anderson-Darling rejects normality at 5%, so the normal-theory Cpk would convert a ratio into a PPM figure through a tail that is not there. Percentile method used instead.",
+      "normality": {
+        "anderson_darling_stat": 10.404757311405547,
+        "critical_value_5pct": 0.781,
+        "normal_at_5pct": false,
+        "skew": 1.3120247515841905,
+        "kurtosis_excess": 2.666205725976181
+      },
+      "refused": false,
       "whole_series_if_computed_anyway": {
-        "Cpk": 1.1689151381159113,
-        "Ppk": 1.0986089628441769,
-        "Cpk_over_Ppk": 1.063995632340118,
-        "observed_ppm": 6000.0,
-        "expected_ppm_long_term": 510.4371595107226
+        "Cpk": 1.0931391871340963,
+        "Ppk": 1.085722203498673,
+        "Cpk_over_Ppk": 1.0068313824765878,
+        "observed_ppm": 4000.0,
+        "expected_ppm_long_term": 586.400894747363
       },
       "characteristic": "seal_force_N"
     },
     {
-      "mu": 1.5997891588025208,
-      "sigma_within": 0.08578337920858999,
-      "sigma_overall": 0.08713955706378682,
-      "Cp": 0.7771513232716177,
-      "Cpk": 0.7763320456935122,
-      "Pp": 0.7650562949025113,
-      "Ppk": 0.7642497679757302,
-      "method": "normal",
-      "Cpk_over_Ppk": 1.015809331221368,
-      "expected_ppm_long_term": 21723.832491695008,
-      "observed_ppm": 20000.0,
-      "normality": {
-        "anderson_darling_stat": 0.2318523723493513,
-        "critical_value_5pct": 0.781,
-        "normal_at_5pct": true,
-        "skew": 0.07236232576267057,
-        "kurtosis_excess": -0.14808741871388298
-      },
-      "refused": false,
+      "refused": true,
+      "reason": "2 out-of-control points on the baseline chart. Capability describes a stable process; on an unstable one Cpk is an estimate of a distribution that does not exist. Stabilise first.",
+      "out_of_control_points": 2,
       "whole_series_if_computed_anyway": {
-        "Cpk": 0.7769728353817267,
-        "Ppk": 0.7612653789461882,
-        "Cpk_over_Ppk": 1.0206333518769528,
-        "observed_ppm": 19000.0,
-        "expected_ppm_long_term": 22352.704255143795
+        "Cpk": 0.7655186145832547,
+        "Ppk": 0.755713998823065,
+        "Cpk_over_Ppk": 1.0129739766306556,
+        "observed_ppm": 23000.0,
+        "expected_ppm_long_term": 22245.16603739327
       },
       "characteristic": "bore_rough_um"
     }
@@ -629,5 +609,5 @@
       "pct_GRR_of_tolerance": 93.54052209228908
     }
   },
-  "wall_seconds": 90.8794593999919
+  "wall_seconds": 182.48330399999395
 }

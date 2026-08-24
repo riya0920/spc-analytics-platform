@@ -1,0 +1,164 @@
+{
+ "skew": {
+  "characteristic": "seal_force_N",
+  "skew_parameter": 0.55,
+  "comparison": {
+   "n": 1000,
+   "skew_before": 1.4206300290897633,
+   "kurtosis_before": 6.254480800260274,
+   "anderson_before": {
+    "stat": 21.18596724727172,
+    "crit_5pct": 0.784,
+    "normal": false
+   },
+   "boxcox": {
+    "lambda": 0.1259414786655761,
+    "shift": 168.0050467477949,
+    "skew_after": 0.007392310818601431,
+    "anderson_stat": 0.4836613771954035,
+    "crit_5pct": 0.784,
+    "normal_after": true
+   },
+   "johnson_su": {
+    "a": -3.254455059477917,
+    "b": 1.9452113877683366,
+    "loc": 169.31603579246467,
+    "scale": 3.6492531614539567,
+    "skew_after": -0.02324238578808849,
+    "anderson_stat": 0.34251774537096935,
+    "crit_5pct": 0.784,
+    "normal_after": true
+   }
+  },
+  "transformed_capability": {
+   "lambda": 0.1259414786655761,
+   "shift": 168.0050467477949,
+   "Cp_transformed": NaN,
+   "Cpk_transformed": 0.8916529854909861,
+   "expected_ppm": NaN,
+   "lcl_original_units": 170.06880616750408,
+   "center_original_units": 178.80372840613268,
+   "ucl_original_units": 210.44908240951426,
+   "limits_are_asymmetric": true,
+   "asymmetry_ratio": 3.6228546905015118
+  },
+  "three_answers": {
+   "normal theory (wrong here)": {
+    "cpk": 1.0931391871340963,
+    "ppm": 586.400894747363
+   },
+   "percentile / ISO 21747": {
+    "ppk": 0.7831511528891183,
+    "ppm": 4000.0
+   },
+   "Box-Cox transformed": {
+    "cpk": 0.8916529854909861,
+    "ppm": NaN
+   }
+  },
+  "observed_ppm": 4000.0,
+  "runs_rule_violations_raw": 129,
+  "runs_rule_violations_transformed": 129
+ },
+ "gauge": {
+  "characteristic": "bore_rough_um",
+  "grr_pct": 78.36644815042573,
+  "sigma_gauge_from_study": 0.05216419429720253,
+  "sigma_gauge_true": 0.075,
+  "sigma_observed": 0.08746658194868048,
+  "corrected": {
+   "valid": true,
+   "sigma_observed": 0.08746658194868048,
+   "sigma_gauge": 0.05216419429720253,
+   "sigma_process": 0.07020897229776933,
+   "cpk_observed": 0.755713998823065,
+   "cpk_gauge_corrected": 0.941471128896196,
+   "understatement": 1.2458034790442227,
+   "gauge_share_of_variance": 0.35568102512917116,
+   "verdict": "the gauge is a meaningful share; measure it before spending on the process"
+  },
+  "with_true_sigmas": {
+   "valid": true,
+   "sigma_observed": 0.08499999999999999,
+   "sigma_gauge": 0.075,
+   "sigma_process": 0.03999999999999999,
+   "cpk_observed": 0.7843137254901958,
+   "cpk_gauge_corrected": 1.6666666666666667,
+   "understatement": 2.125000000000001,
+   "gauge_share_of_variance": 0.7785467128027682,
+   "verdict": "the GAUGE is the problem -- improving the process cannot fix this"
+  },
+  "mismatched_study": {
+   "sigma_gauge": 0.13224551752133598,
+   "valid": false,
+   "why": "gauge variance exceeds observed variance -- the gauge study and the process study are inconsistent, and neither Cpk is trustworthy until that is resolved"
+  }
+ },
+ "weekly": {
+  "report": {
+   "path": "C:\\Users\\riyas\\Desktop\\manufacturing-hm\\data2-spc-platform\\out\\weekly_report.html",
+   "bytes": 6664,
+   "week": "2026-W34",
+   "n_open": 12,
+   "self_contained": true
+  },
+  "n_new_events": 15,
+  "duplicate_suppressed": true,
+  "close_without_cause_refused": "cannot close without an assignable cause -- a queue that can be emptied without naming causes produces no Pareto, and th",
+  "n_open": 12,
+  "oldest_open_days": 17.56073591235611,
+  "changes": [
+   {
+    "characteristic": "seal_force_N",
+    "cpk": 0.7409499282328823,
+    "ppm": 3000.0,
+    "method": "percentile",
+    "cpk_last_week": 0.8198227363525347,
+    "delta": -0.07887280811965236
+   },
+   {
+    "characteristic": "bore_rough_um",
+    "cpk": 0.7711877420392074,
+    "ppm": 19853.62110291919,
+    "method": "normal theory",
+    "cpk_last_week": 0.8027067015416411,
+    "delta": -0.031518959502433774
+   },
+   {
+    "characteristic": "cavity_mix_mm",
+    "cpk": 0.9028060256473124,
+    "ppm": 10000.0,
+    "method": "percentile",
+    "cpk_last_week": 0.8822144538814486,
+    "delta": 0.020591571765863792
+   },
+   {
+    "characteristic": "shaft_dia_mm",
+    "cpk": 1.1640202636467634,
+    "ppm": 0.0,
+    "method": "percentile",
+    "cpk_last_week": 1.052198999165618,
+    "delta": 0.11182126448114538
+   },
+   {
+    "characteristic": "wall_thk_mm",
+    "cpk": 0.5178077796046063,
+    "ppm": 48800.0,
+    "method": "percentile",
+    "cpk_last_week": 0.3998873742217202,
+    "delta": 0.11792040538288612
+   }
+  ],
+  "pareto": [
+   [
+    "coolant temperature",
+    2
+   ],
+   [
+    "setup error",
+    1
+   ]
+  ]
+ },
+ "wall_seconds": 6.096471900003962
+}

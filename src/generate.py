@@ -20,6 +20,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+import zlib
+
 import numpy as np
 import pandas as pd
 
@@ -55,7 +57,13 @@ def simulate(ch: Characteristic, seed: int = SEED) -> tuple[pd.DataFrame, pd.Dat
     measurements: one row per part, columns subgroup / part / value
     truth:        one row per disturbance, with the subgroup window it occupies
     """
-    rng = np.random.default_rng(seed + abs(hash(ch.name)) % 10_000)
+    # crc32, NOT hash(). Python salts str hashing per process (PEP 456), so
+    # `hash(ch.name)` returns a different value on every interpreter start --
+    # which made this generator produce DIFFERENT DATA on every run and silently
+    # broke the reproducibility every report in this project claims. Every
+    # number published before this fix came from a dataset a re-run could not
+    # reproduce.
+    rng = np.random.default_rng(seed + zlib.crc32(ch.name.encode()) % 10_000)
     n, m = ch.subgroup_size, ch.n_subgroups
     base = rng.standard_normal((m, n))
     if ch.skew > 0:
