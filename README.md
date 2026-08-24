@@ -238,23 +238,81 @@ the individuals series has five times as many points. Mapping both back onto
 subgroup indices is what makes the comparison mean anything, and it is an easy
 mistake to make with two charts of the same process at different granularity.
 
+## The last four items — see [docs/WEEKLY_AND_TRANSFORMS.md](docs/WEEKLY_AND_TRANSFORMS.md)
+
+```bash
+python run_weekly.py    # ~6 s; writes the doc and out/weekly_report.html
+```
+
+- **The skew FIX, replacing a policy.** The README said the right answer was "a
+  transformation or a distribution-appropriate chart, and neither is
+  implemented". Both are now — and the comparison is the finding: **Box-Cox
+  removes the skew almost perfectly (1.42 →
+  0.007) and still fails the normality test.** Johnson S<sub>U</sub>
+  passes. Box-Cox only addresses skew, and this characteristic also has excess
+  kurtosis (6.25 against 3.0); Johnson fits both, which
+  is what its two extra parameters buy.
+- **And the payoff is the runs rules.** Pass 3 judged stability on rule 1 alone
+  because rules 2–8 assume symmetry — defensible, and it threw away seven rules.
+  On transformed data the symmetry is restored and **the full rule set becomes
+  valid again**, which no policy could deliver.
+- **Gauge-corrected capability.** Cpk **0.76 as measured →
+  0.94** with the instrument removed;
+  **36% of the observed variance is the
+  gauge**. Cpk on measured values blames the process for the instrument, and
+  those are different budgets and different teams.
+- **A disposition queue that survives a restart.** 12 open items,
+  oldest **17.6 days**. Ageing is the most useful thing a
+  disposition queue does and it is impossible in-process — an in-process queue is
+  born every morning. The UNIQUE key makes the weekly job idempotent, so Monday's
+  re-run does not raise a second event for every excursion already being worked.
+- **The weekly report**, ordered by **change and by age, not by magnitude**. A
+  characteristic at Cpk 1.9 for a year is not news; one that fell from 1.9 to 1.4
+  this week is the meeting.
+
+### Two bugs found doing it
+
+**Box-Cox needed a two-parameter fit to work at all.** The data spans 170–216 — a
+max/min ratio of 1.27, over which x^λ is nearly linear whatever λ is — so the
+likelihood is flat and the optimiser wandered to **λ = −13.4**, destroying the
+data through catastrophic cancellation. Shifting the minimum to near zero makes λ
+identifiable: **0.126**, essentially a log.
+
+**And the gauge guard fired on my own mistake.** The first version ran the R&R
+study with its *defaults* — a generic study at σ_part = 1.0 — and applied its GRR
+to a roughness measured in micrometres. The correction refused with *"gauge
+variance exceeds observed variance"*, which is exactly the inconsistency it
+exists to detect. Clamping the negative variance to zero, which is the obvious
+alternative, would have reported a plausible corrected Cpk built on a study of a
+different characteristic and nothing would have flagged it.
+
+### A reproducibility bug that had been there since pass 1
+
+`src/generate.py` seeded its RNG with `hash(ch.name)`. **Python salts string
+hashing per process** (PEP 456), so the generator produced different data on
+every run — three consecutive runs gave means of 180.017141, 179.970739 and
+179.917763. Every number published before this fix came from a dataset a re-run
+could not reproduce, which silently broke the reproducibility this whole project
+claims. Replaced with `zlib.crc32`; all reports regenerated. The same bug was in
+ML-3 and SE-1 and is fixed there too.
+
 ## What is NOT built
 
 1. **No real measurement data.** Everything is `src/generate.py`. The generators
    plant known disturbances, which is what makes detection scoreable, and it is
    also what makes every number here a statement about the generator.
-2. **No weekly quality report as a scheduled artefact.** The dashboard and the
-   disposition queue are the ingredients; nothing emails a PDF on Mondays.
-3. **The disposition queue is in-process.** No persistence, no users, no
-   permissions, no audit trail beyond the event list — so it demonstrates the
-   state machine and is not a quality-system record.
-4. **The skew workaround is a policy, not a fix.** Judging stability on rule 1
-   alone is defensible and documented, but the right answer for a skewed
-   characteristic is a transformation or a distribution-appropriate chart, and
-   neither is implemented.
-5. **No gauge R&R feeding capability automatically.** `src/gauge_rr.py` exists
-   and the bore-roughness characteristic is deliberately gauge-dominated, but
-   nothing subtracts measurement variation from the capability calculation.
+2. **The queue has no users and no permissions.** It persists, ages and enforces
+   a cause before closing; it does not authenticate anybody, and its audit trail
+   is the event rows rather than a controlled record.
+3. **Nothing schedules the weekly report.** It is a script that writes a
+   self-contained page; nothing runs it on Mondays or delivers it.
+4. **The transformation is fitted once, not monitored.** A transformation is
+   valid near the operating point it was fitted at, and nothing here re-tests it
+   when the process moves — which is the same discipline the limit-revision
+   policy applies to control limits and it is not wired to it.
+5. **Johnson S<sub>U</sub> is fitted but not charted.** It wins the normality
+   test; the control chart still uses the Box-Cox scale, because back-transformed
+   Johnson limits need the inverse and it is not implemented.
 
 ## Layout
 
