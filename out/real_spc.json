@@ -1,0 +1,211 @@
+{
+  "published": {
+    "s1_repeatability": 0.06139,
+    "s1_df": 125,
+    "s2_level2": 0.0268,
+    "s2_df": 24,
+    "f_crit_0_05_5_125": 2.29,
+    "s_chart_ucl": 0.09238,
+    "J_repetitions": 6,
+    "K_days": 25,
+    "source": "NIST/SEMATECH e-Handbook of Statistical Methods, section 2.6.2.2 (check standard for resistivity measurements)"
+  },
+  "reproduction": {
+    "K_days": 25,
+    "J_repetitions": 6,
+    "s1": 0.061387946699657574,
+    "s1_df": 125,
+    "s2": 0.026798134263414822,
+    "s2_df": 24,
+    "s1_if_you_average_sds_instead": 0.056159999999999995,
+    "pooling_matters_by": 0.005227946699657579,
+    "f_crit": 2.286770719888279,
+    "ucl": 0.09283129710655011,
+    "ucl_from_nists_own_rounded_inputs": 0.09289992738963793,
+    "ucl_nist_states": 0.09238,
+    "f_implied_by_nists_ucl": 2.264439119989452,
+    "days_exceeding_nists_ucl": 2,
+    "same_days_either_way": true,
+    "days_exceeding_ucl": 2,
+    "nist_says_two_exceed": true,
+    "checks": [
+      {
+        "quantity": "pooled repeatability s1",
+        "computed": 0.061387946699657574,
+        "nist": 0.06139,
+        "abs_diff": 2.0533003424264007e-06,
+        "agrees": true
+      },
+      {
+        "quantity": "level-2 s2",
+        "computed": 0.026798134263414822,
+        "nist": 0.0268,
+        "abs_diff": 1.865736585178468e-06,
+        "agrees": true
+      },
+      {
+        "quantity": "F(0.05, 5, 125)",
+        "computed": 2.286770719888279,
+        "nist": 2.29,
+        "abs_diff": 0.003229280111721078,
+        "agrees": true
+      },
+      {
+        "quantity": "s-chart UCL",
+        "computed": 0.09283129710655011,
+        "nist": 0.09238,
+        "abs_diff": 0.00045129710655010535,
+        "agrees": false
+      }
+    ],
+    "all_agree": false,
+    "mean_level": 97.06983999999999
+  },
+  "own": {
+    "n": 25,
+    "mean": 97.06983999999999,
+    "J": 6,
+    "sigma_single_measurement": 0.06698223645116672,
+    "sigma_daily_mean": 0.03669087079915122,
+    "capability_at_wrong_scale": {
+      "mu": 97.06983999999999,
+      "sigma_within": 0.061387946699657574,
+      "sigma_overall": 0.026798134263414822,
+      "Cp": 16.289842774714895,
+      "Cpk": 0.37922753979528145,
+      "Pp": 37.31603066729961,
+      "Ppk": 0.8687171939345486,
+      "method": "normal",
+      "Cpk_over_Ppk": 0.4365373938067277,
+      "expected_ppm_long_term": 4578.2964577920875,
+      "observed_ppm": 0.0,
+      "normality": {
+        "anderson_darling_stat": 0.20313475161168526,
+        "critical_value_5pct": 0.703,
+        "normal_at_5pct": true,
+        "skew": -0.2917351881607793,
+        "kurtosis_excess": -0.3985245295746438
+      },
+      "refused": false
+    },
+    "individuals": {
+      "center": 97.06983999999999,
+      "lcl": 96.98841790122401,
+      "ucl": 97.15126209877596,
+      "sigma": 0.027140699591990697
+    },
+    "moving_range": {
+      "center": 0.030624999999999975,
+      "ucl": 0.1000373392065162
+    },
+    "rules_fired": {},
+    "n_rules_fired": 0,
+    "spec": {
+      "nominal": 100.0,
+      "lsl": 97.0,
+      "usl": 103.0
+    },
+    "points_beyond_limits": 0,
+    "in_control": true,
+    "capability": {
+      "mu": 97.06983999999999,
+      "sigma_within": 0.06698223645116672,
+      "sigma_overall": 0.026798134263414822,
+      "Cp": 14.929331312027006,
+      "Cpk": 0.3475548329439142,
+      "Pp": 37.31603066729961,
+      "Ppk": 0.8687171939345486,
+      "method": "normal",
+      "Cpk_over_Ppk": 0.40007822496270273,
+      "expected_ppm_long_term": 4578.2964577920875,
+      "observed_ppm": 0.0,
+      "normality": {
+        "anderson_darling_stat": 0.20313475161168526,
+        "critical_value_5pct": 0.703,
+        "normal_at_5pct": true,
+        "skew": -0.2917351881607793,
+        "kurtosis_excess": -0.3985245295746438
+      },
+      "refused": false
+    },
+    "normality": {
+      "anderson_darling_stat": 0.20313475161168526,
+      "critical_value_5pct": 0.703,
+      "normal_at_5pct": true,
+      "skew": -0.2917351881607793,
+      "kurtosis_excess": -0.3985245295746438
+    },
+    "transforms": {
+      "n": 25,
+      "skew_before": -0.2917351881607793,
+      "kurtosis_before": 2.601475470425356,
+      "anderson_before": {
+        "stat": 0.20313475161168526,
+        "crit_5pct": 0.703,
+        "normal": true
+      },
+      "boxcox": {
+        "lambda": 0.9967308170815414,
+        "shift": 97.012,
+        "skew_after": -0.296542723037126,
+        "anderson_stat": 0.20427103363609334,
+        "crit_5pct": 0.703,
+        "normal_after": true
+      },
+      "johnson_su": {
+        "a": 12.63313259931757,
+        "b": 6.627482244993441,
+        "loc": 97.23644925475907,
+        "scale": 0.05006495125251656,
+        "skew_after": 0.022809778580703575,
+        "anderson_stat": 0.1887504808761875,
+        "crit_5pct": 0.703,
+        "normal_after": true
+      }
+    },
+    "sigma_within_source": "NIST's pooled repeatability s1, not the moving range -- the six repetitions per day are the real within-subgroup replication and MR would estimate day-to-day instead",
+    "sigma_within": 0.061387946699657574,
+    "sigma_from_moving_range": 0.027149822695035443
+  },
+  "gauge": {
+    "n": 300,
+    "n_parts": 5,
+    "n_probes": 5,
+    "reps_per_cell": 12,
+    "balanced": true,
+    "cell_sizes": [
+      12
+    ],
+    "grr": {
+      "parts": 5.0,
+      "operators": 5.0,
+      "repeats": 12.0,
+      "EV_repeatability": 0.053999029530756124,
+      "AV_reproducibility": 0.021557519831216666,
+      "GRR": 0.05814311525483281,
+      "PV_part": 2.9104137176162923,
+      "TV_total": 2.9109944399707506,
+      "pct_GRR_of_TV": 1.9973626351349894,
+      "ndc": 70.57900705617725,
+      "interaction_p": 0.8833316904227365,
+      "interaction_kept": 0.0,
+      "verdict_AIAG": "acceptable",
+      "pct_of_process_variation_that_is_gauge": 0.03989457496233388,
+      "pct_GRR_of_tolerance": 5.814311525483281
+    },
+    "probe_means": {
+      "1": 97.20825166666667,
+      "2062": 97.199995,
+      "2362": 97.15428833333334,
+      "281": 97.209315,
+      "283": 97.19591833333334
+    },
+    "probe_bias_spread": 0.055026666666663004,
+    "probe_bias_anova": {
+      "F": 10.707811352446642,
+      "p": 4.07381886216236e-08,
+      "significant_at_5pct": true
+    }
+  },
+  "elapsed_s": 0.13902926445007324
+}

@@ -296,23 +296,113 @@ could not reproduce, which silently broke the reproducibility this whole project
 claims. Replaced with `zlib.crc32`; all reports regenerated. The same bug was in
 ML-3 and SE-1 and is fixed there too.
 
+## Built in the fifth pass — see [docs/REAL_SPC.md](docs/REAL_SPC.md)
+
+```bash
+python fetch_nist.py       # NIST e-Handbook case studies, gitignored
+python run_real_spc.py     # < 1 s
+```
+
+The first item on the not-built list was *no real measurement data — everything
+is `src/generate.py`*. Fetching real numbers would close that item and prove
+nothing: a control chart computed on real data is still a control chart
+validated against itself.
+
+What makes it worth doing is that **NIST publishes the answers**. The
+check-standard case study — resistivity of silicon wafer #137 on probe #2362,
+6 repetitions a day for 25 days — states its
+variance decomposition in prose, so this project's arithmetic finally has a
+reference instead of a mirror.
+
+| quantity | computed here | NIST publishes | agrees |
+|---|---:|---:|:--:|
+| pooled repeatability s1 | 0.06139 | 0.06139 | ✅ |
+| level-2 s2 | 0.02680 | 0.0268 | ✅ |
+| F(0.05, 5, 125) | 2.28677 | 2.29 | ✅ |
+| s-chart UCL | 0.09283 | 0.09238 | ❌ |
+
+**3 of 4 agree** to NIST's published precision — the
+first time anything here has been checked against a number it did not produce.
+
+### The fourth is a discrepancy in the reference
+
+NIST's printed UCL does not follow from NIST's printed inputs. They state
+s₁ = 0.06139, F = 2.29 and UCL = 0.09238, with the formula
+UCL = s₁·√F — but s₁·√F is **0.09290** with
+their rounded F and **0.09283** with the exact one. The value they print
+implies F = **2.2644**, which is not F(0.05, 5, 125).
+
+It is 0.5% and it changes nothing — both limits flag exactly the
+2 days NIST says are flagged. It is written down rather
+than absorbed by a wider tolerance, because quietly loosening a threshold until a
+check passes is the habit this project exists to argue against.
+
+### The scale trap, which produced a plausible and meaningless Cpk
+
+The charted values are **averages of 6 measurements** and `s1` is the
+standard deviation of **one**. Using `s1` as σ_within against them mixes two
+scales, and it does not error — it produces a perfectly reasonable-looking index
+that answers no question anybody asked.
+
+| question | σ | value |
+|---|---|---:|
+| a **single** measurement on a new wafer | √(s₁²+s₂²) | 0.06698 |
+| the **daily average**, which is what is plotted | √(s₁²/6+s₂²) | 0.03669 |
+| just using `s1` — **the wrong one** | s₁ | 0.06139 |
+
+Corrected, Cpk is **0.348** against
+0.379 at the wrong scale. And
+**Cpk/Ppk = 0.40, below 1** — the reverse of the usual case,
+because averaging six repetitions divides repeatability by √6, so the spread of
+the daily averages is *smaller* than the σ of a single measurement.
+
+Real check-standard data also turns out to be **normal** (Anderson–Darling
+0.203 against 0.703) and needs no
+transformation — where the synthetic study needed one to pass the same test.
+
+### A %GRR of 2.00% that hides a real bias
+
+The gauge study (5 wafers × 5 probes) comes out at
+**2.00% GRR, ndc 71** — "acceptable"
+by AIAG, an excellent measurement system. And the probes are **measurably biased
+against each other**: a one-way ANOVA on wafer-centred values, so wafer variation
+cannot masquerade as probe bias, gives F = 10.71, p = 4.1e-08. The
+spread between probe means is 0.0550 ohm·cm, about
+2.1× the day-to-day standard deviation.
+
+Both are true, because **%GRR is a ratio to part variation**. These wafers span a
+wide resistivity range, so a real systematic offset between probes disappears
+into the denominator. A measurement system can be excellent *for telling these
+parts apart* and unfit for comparing results between probes — which, for a
+laboratory issuing certificates, is the question that matters. NIST's own
+conclusion is that the probes are not equivalent; the ANOVA agrees with NIST
+rather than with the %GRR headline.
+
 ## What is NOT built
 
-1. **No real measurement data.** Everything is `src/generate.py`. The generators
-   plant known disturbances, which is what makes detection scoreable, and it is
-   also what makes every number here a statement about the generator.
-2. **The queue has no users and no permissions.** It persists, ages and enforces
+1. **Only the check-standard and gauge studies use real data.** The subgroup
+   charts, the attribute charts, the ARL work and the limit-revision policy all
+   still run on `src/generate.py`. One process and 25 days is not a production
+   line.
+2. **The spec limits in the real-data study are invented.** NIST's study has no
+   tolerance; the ±3% window on nominal is a stand-in, stated as one, and every
+   capability index computed against it is a statement about that choice as much
+   as about the process.
+3. **The queue has no users and no permissions.** It persists, ages and enforces
    a cause before closing; it does not authenticate anybody, and its audit trail
    is the event rows rather than a controlled record.
-3. **Nothing schedules the weekly report.** It is a script that writes a
+4. **Nothing schedules the weekly report.** It is a script that writes a
    self-contained page; nothing runs it on Mondays or delivers it.
-4. **The transformation is fitted once, not monitored.** A transformation is
+5. **The transformation is fitted once, not monitored.** A transformation is
    valid near the operating point it was fitted at, and nothing here re-tests it
-   when the process moves — which is the same discipline the limit-revision
-   policy applies to control limits and it is not wired to it.
-5. **Johnson S<sub>U</sub> is fitted but not charted.** It wins the normality
-   test; the control chart still uses the Box-Cox scale, because back-transformed
-   Johnson limits need the inverse and it is not implemented.
+   when the process moves.
+6. **Johnson S<sub>U</sub> is fitted but not charted.** It wins the normality
+   test on the synthetic characteristic; the control chart still uses the
+   Box-Cox scale, because back-transformed Johnson limits need the inverse and it
+   is not implemented.
+7. **The %GRR-versus-bias finding is diagnosed, not fixed.** The right answer is
+   to report a bias component against a reference value alongside %GRR, which is
+   what a calibration laboratory does and what this gauge module does not.
 
 ## Layout
 

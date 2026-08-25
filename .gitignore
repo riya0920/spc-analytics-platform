@@ -9,3 +9,7 @@ out/*.log
 
 out/quality.db
 out/rerun*.log
+
+# NIST e-Handbook case-study data: public domain, fetched by fetch_nist.py,
+# not redistributed here.
+data/NIST/
